@@ -18,17 +18,45 @@ html {
 
 .hover-pointer{
     /* background-color: beige; */
-    transition: all ease-in;
-    transition: all 0.5s ease-in;
+    transition: all 0.5s cubic-bezier(.25,0,.5,.99);
+}
+
+.responsive-navbar {
+    right: 0;
+    transition: all 0.5s cubic-bezier(.25,0,.5,.99);
+    transform: translate(70vw);
+    background-color: rgba(255, 255, 255, 0.589);
+    backdrop-filter: blur(7px);
+    box-shadow: 0px 0px 60px rgba(58, 58, 58, 0.329);
+}
+.w-open {
+    transition: all 0.5s cubic-bezier(.25,0,.5,.99);
+    transform: translate(0vw) !important;
+}
+
+.h-list {
+    width: 26px;
+    transform: rotate(0deg) translateY(0px);
+    transition: all 0.5s cubic-bezier(.25,0,.5,.99);
 }
 
 .open .h-list:nth-child(1){
-    width: 20px;
-    transform: t;
+    /* width: 25px; */
+    transform: rotate(-20deg) translateY(-5px);
+    
+}
+.open .h-list:nth-child(2){
+    transform: rotate(20deg) translateY(5px);
+    /* width: 25px; */
+
 }
 
 .close .h-list {
     width: 20px;
+}
+
+.text-black .h-list {
+    background-color: black;
 }
 
 
@@ -44,9 +72,8 @@ html {
     /* transition-timing-function:   ; */
 }
 
-.transation {
+.transition-custom {
     transition: all 0.5s cubic-bezier(.25,0,.5,.99);
-
 }
 .black .hover-pointer::before{
 
@@ -59,7 +86,7 @@ html {
 }
 
 .navbar {
-    background-color: rgba(245, 245, 220, 0.121);
-    backdrop-filter: blur(4px);
-    box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.096);
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(7px);
+    box-shadow: 0px 0px 60px rgba(58, 58, 58, 0.329);
 }
