@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     scroll-behavior: smooth !important;
+    cursor: none;
 }
 
 html {
@@ -14,6 +15,10 @@ html {
 
 .text-shadow-sm {
     text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.212);
+}
+.cursor-custom , .cursor-custom-2 , .cursor-custom-3 {
+    pointer-events: none;
+    /* box-shadow: 0px 0px 10px rgb(0, 0, 0); */
 }
 
 .hover-pointer{
@@ -73,7 +78,19 @@ html {
 }
 
 .transition-custom {
-    transition: all 0.5s cubic-bezier(.25,0,.5,.99);
+    transition: all 0.2s cubic-bezier(.25,0,.5,.99);
+}
+
+.tirai-transition {
+    transition: all 1s cubic-bezier(.25,0,.5,.99);
+
+}
+.perspective {
+    perspective: 300px;
+}
+.sub-head {
+    /* transform: rotateX(20deg) rotateY(0deg); */
+    transform-style: preserve-3d;
 }
 .black .hover-pointer::before{
 
@@ -86,6 +103,7 @@ html {
 }
 
 .navbar {
+    /* transform: skew(-0.06turn, 18deg); */
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(7px);
     box-shadow: 0px 0px 60px rgba(58, 58, 58, 0.329);

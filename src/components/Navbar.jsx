@@ -45,15 +45,15 @@ const openNav = () => {
         <p className="">SALMAN-FIKRI</p>
         <p>PORTOFOLIOO</p>
       </div>
-      <div className="hidden md:flex md:w-1/3 lg:w-1/4 justify-between cursor-pointer text-shadow" >
+      <div className="hidden md:flex md:w-1/3 lg:w-1/4 justify-between cursor-none text-shadow" >
         <p className='relative overflow-hidden'><a data-scroll-to href="#aboutme" className="hover-pointer">About me</a></p>
         <p className='relative overflow-hidden'><a data-scroll-to href="#project" className="hover-pointer" >Project</a></p>
         <p className='relative overflow-hidden'><a data-scroll-to href="#contact" className="hover-pointer" >Contact</a></p>
       </div>
-      <div className="hidden md:flex gap-5 cursor-pointer text-lg text-shadow">
-        <a href="" className='relative overflow-hidden'><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
-        <a href="" className='relative overflow-hidden'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
-        <a href="" className='relative overflow-hidden'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>
+      <div className="hidden md:flex gap-5 cursor-none text-lg text-shadow">
+        <a href="" className='relative overflow-hidden cursor-none'><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
+        <a href="" className='relative overflow-hidden cursor-none'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
+        <a href="" className='relative overflow-hidden cursor-none'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>
       </div>
       <div className='lg:hidden transition-custom bg-[#ffffff00] humb' onClick={openNav} >
         <div className='flex flex-col gap-1 p-6 bg- -mr-4 z-50 '>
@@ -61,12 +61,12 @@ const openNav = () => {
           <div className='relative h-[3px] bg-white rounded-full h-list'></div>
         </div>
         <div className='  h-screen responsive-navbar fixed top-0 px-16 w-[70vw] py-24 flex flex-col gap-10'>
-            <div className=" flex-col gap-10 flex md:w-1/3 lg:w-1/4 justify-between cursor-pointer text-shadow" >
+            <div className=" flex-col gap-10 flex md:w-1/3 lg:w-1/4 justify-between cursor-none text-shadow" >
               <p className='relative overflow-hidden'><a data-scroll-to href="#aboutme" className="hover-pointer">About me</a></p>
               <p className='relative overflow-hidden'><a data-scroll-to href="#project" className="hover-pointer" >Project</a></p>
               <p className='relative overflow-hidden'><a data-scroll-to href="#contact" className="hover-pointer" >Contact</a></p>
             </div> 
-            <div className=" flex gap-5  cursor-pointer text-lg text-shadow">
+            <div className=" flex gap-5  cursor-none text-lg text-shadow">
               <a href="" className='relative overflow-hidden '><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
               <a href="" className='relative overflow-hidden'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
               <a href="" className='relative overflow-hidden'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>

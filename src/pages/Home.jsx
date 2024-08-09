@@ -5,14 +5,56 @@ import LocomotiveScroll from 'locomotive-scroll';
 import Button from "../components/Button";
 import Project from "../components/Project";
 import Medsos from "../components/Medsos";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import Cursor from "../components/Cursor";
+import Tirai from "../components/Tirai";
+import SubHead from "../fragments/SubHead";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 
 const Home = () => {
+  gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+  useGSAP( ()=> {
+    gsap.from(".text-header",{
+      y:150,
+      duration: 2,
+      ease: 'back.out',
+      opacity:0,
+      stagger: 0.25,
+      delay: 3.7
+    })
+  })
 
     useEffect(() => {
 
         const body = document.querySelector("#body")
-      
+        const cursor = document.querySelector('.cursor-custom-child')
+        const cursor2 = document.querySelector('.cursor-custom-2-child')
+        const cursor3 = document.querySelector('.cursor-custom-3-child')
+
+        const hoverPointer = document.querySelectorAll('.hover-pointer')
+
+        hoverPointer.forEach( (hoverElement) => {
+
+          hoverElement.addEventListener('mouseover' ,() => {
+              cursor.style.transform = 'scale(0.5)'
+              cursor2.style.transform = 'scale(.3)'
+              cursor3.style.transform = 'scale(1.4)'
+            })
+            
+            hoverElement.addEventListener('mouseleave', ()=> {
+            cursor3.style.transform = 'scale(1)'
+            cursor2.style.transform = 'scale(1)'
+            cursor.style.transform = 'scale(1)'
+
+          })
+
+        })
+        
+
         const locomotiveScroll = new LocomotiveScroll({
           lenisOptions: {
               wrapper: window,
@@ -35,12 +77,14 @@ const Home = () => {
 
 
   return (
-    <div className="scroll-smooth text-white font-['Inter']" id='body'>
+    <div className="scroll-smooth text-white font-['Inter'] cursor-none " id='body' >
      <Navbar />
+     <Cursor />
+     <Tirai />
       <section className='bg-stone-950 h-screen flex flex-col justify-end p-10 shadow-2xl'>
         <div>
-          <h1 className="text-3xl font-bold text-shadow-sm lg:text-8xl md:text-6xl sm:text-4xl ">
-            FULLSTACK <br/> WEB DEVELOPER
+          <h1 className="text-3xl font-bold text-shadow-sm lg:text-8xl md:text-6xl sm:text-4xl  ">
+            <p className=" text-header ">FULLSTACK </p><p className=" text-header">WEB DEVELOPER</p>
           </h1>
         </div>
       </section>
@@ -50,8 +94,8 @@ const Home = () => {
                 <h3>
                     what you can expect from me?
                 </h3>
-                <p className="text-2xl md:text-6xl mt-10">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente esse itaque quis recusandae porro commodi deleniti nam alias blanditiis ab.
+                <p className="text-2xl md:text-6xl mt-10 flex flex-wrap perspective"> 
+                    <SubHead text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente esse itaque quis recusandae porro commodi deleniti nam alias blanditiis ab.'} />
                 </p>
             </div>
             <div className=" lg:flex max-w-[1200px] justify-center ">
