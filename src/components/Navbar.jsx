@@ -51,11 +51,11 @@ const openNav = () => {
         <p className='relative overflow-hidden'><a data-scroll-to href="#contact" className="hover-pointer" >Contact</a></p>
       </div>
       <div className="hidden md:flex gap-5 cursor-none text-lg text-shadow">
-        <a href="" className='relative overflow-hidden cursor-none'><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
-        <a href="" className='relative overflow-hidden cursor-none'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
-        <a href="" className='relative overflow-hidden cursor-none'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>
+        <a href="https://www.instagram.com/msf.dev_0078/" className='relative overflow-hidden cursor-none'><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
+        <a href="https://www.linkedin.com/in/m-salman-al-fikri-b28201265/" className='relative overflow-hidden cursor-none'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
+        <a href="https://github.com/SalmanFikri00" className='relative overflow-hidden cursor-none'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>
       </div>
-      <div className='lg:hidden transition-custom bg-[#ffffff00] humb' onClick={openNav} >
+      <div className='md:hidden transition-custom bg-[#ffffff00] humb' onClick={openNav} >
         <div className='flex flex-col gap-1 p-6 bg- -mr-4 z-50 '>
           <div className='relative h-[3px] bg-white rounded-full h-list'></div>
           <div className='relative h-[3px] bg-white rounded-full h-list'></div>
@@ -67,9 +67,9 @@ const openNav = () => {
               <p className='relative overflow-hidden'><a data-scroll-to href="#contact" className="hover-pointer" >Contact</a></p>
             </div> 
             <div className=" flex gap-5  cursor-none text-lg text-shadow">
-              <a href="" className='relative overflow-hidden '><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
-              <a href="" className='relative overflow-hidden'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
-              <a href="" className='relative overflow-hidden'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>
+              <a href="https://www.instagram.com/msf.dev_0078/" className='relative overflow-hidden '><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
+              <a href="https://www.linkedin.com/in/m-salman-al-fikri-b28201265/" className='relative overflow-hidden'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
+              <a href="https://github.com/SalmanFikri00" className='relative overflow-hidden'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>
             </div>
         </div>
       </div>

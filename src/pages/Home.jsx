@@ -11,21 +11,62 @@ import Cursor from "../components/Cursor";
 import Tirai from "../components/Tirai";
 import SubHead from "../fragments/SubHead";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import InfiniteSlider from "../components/InfiniteSlider";
+import CustomEase from "gsap/CustomEase";
+import InfiniteSliderReverse from "../components/InfiniteSliderReverse";
 
 
 
 const Home = () => {
-  gsap.registerPlugin(useGSAP, ScrollTrigger);
+  gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
 
   useGSAP( ()=> {
     gsap.from(".text-header",{
       y:150,
-      duration: 2,
+      duration: 1.5,
       ease: 'back.out',
       opacity:0,
-      stagger: 0.25,
-      delay: 3.7
+      stagger: {
+        from:'random',
+        amount:0.3,
+      },
+      delay: 3.4
     })
+
+    gsap.from(".project1",{
+      scrollTrigger:{
+          trigger: '.project1',
+          start: 'bottom bottom'
+    }, 
+      duration: 1,
+      ease: "circ.out",
+      opacity: 0,
+      x:-200,
+      stagger: 0.1
+    })
+    gsap.from(".project2",{
+      scrollTrigger:{
+        trigger: '.project2',
+        start: 'bottom bottom'
+      }, 
+      duration: 1,
+      ease: "circ.out",
+      opacity: 0,
+      x:-200,
+      stagger: 0.1
+    })
+    gsap.from(".project3",{
+      scrollTrigger:{
+        trigger: '.project3',
+        start: 'bottom bottom'
+      }, 
+      duration: 1,
+      ease: "circ.out",
+      opacity: 0,
+      x:-200,
+      stagger: 0.1
+    })
+
   })
 
     useEffect(() => {
@@ -56,101 +97,69 @@ const Home = () => {
         
 
         const locomotiveScroll = new LocomotiveScroll({
+          autoStart: false,
           lenisOptions: {
               wrapper: window,
               content: body,
-              lerp: 0.1,
-              duration: 1.2,
+              lerp: 0.05,
+              duration: 1.5,
               orientation: 'vertical',
               gestureOrientation: 'vertical',
               smoothWheel: true,
-              smoothTouch: false,
-              wheelMultiplier: 1,
+              smoothTouch: true,
+              wheelMultiplier: 1.5,
               touchMultiplier: 2,
               normalizeWheel: true,
-              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+              easing: (t) => t < 0.5 
+              ? 16 * t * t * t * t * t 
+              : 1 - Math.pow(-2 * t + 2, 5) / 2
             },
           });
+
+          setTimeout(() => {
+            locomotiveScroll.start();
+        }, 3300)
           
         }, [])
 
 
 
   return (
-    <div className="scroll-smooth text-white font-['Inter'] cursor-none " id='body' >
+    <div data-scroll-section className="scroll-smooth text-white font-['Inter'] cursor-none overflow-hidden" id='body' >
      <Navbar />
      <Cursor />
      <Tirai />
-      <section className='bg-stone-950 h-screen flex flex-col justify-end p-10 shadow-2xl'>
+      <section className='relative bg-stone-950 h-screen flex flex-col justify-end p-10 shadow-2xl'>
+        <div className="w-full h-full overflow-hidden flex justify-center absolute top-0 bottom-0">
+          {/* <img className='h-[150%] w-fit ' src="/myPhoto.jpg" alt="" width='100vw'/> */}
+        </div>
         <div>
           <h1 className="text-3xl font-bold text-shadow-sm lg:text-8xl md:text-6xl sm:text-4xl  ">
-            <p className=" text-header ">FULLSTACK </p><p className=" text-header">WEB DEVELOPER</p>
+            <p className=" text-header ">FULLSTACK </p><p className=" text-header">WEB <span className=" font-thin">|</span> Cloud <span className=" font-thin">|</span> IoT</p>
           </h1>
         </div>
       </section>
-      <section data-scroll-section id="aboutme" className="flex flex-col pt-32 px-10 items-center text-black">
+      <section id="aboutme" className="flex flex-col pt-32 px-10 items-center text-black">
         <div className=" max-w-[1200px]">
             <div className="">
                 <h3>
-                    what you can expect from me?
+                    About Me!
                 </h3>
-                <p className="text-2xl md:text-6xl mt-10 flex flex-wrap perspective"> 
-                    <SubHead text={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente esse itaque quis recusandae porro commodi deleniti nam alias blanditiis ab.'} />
+                <p className=" font-light text-lg md:text-2xl mb-8 lg:text-4xl mt-10 flex flex-wrap perspective"> 
+                    <SubHead text={'I am a student at SMK Negeri 26 Jakarta, majoring in Information Systems and Network Applications. Driven by curiosity and a passion for learning, I enjoy exploring new and exciting challenges, which has allowed me to develop a diverse skill set.'} />
                 </p>
             </div>
-            <div className=" lg:flex max-w-[1200px] justify-center ">
-                <div className="lg:w-1/2 py-10 ">
-                    <h4>Skill</h4>
-                    <div className=" md:max-w-[500px] pr-4 flex flex-wrap py-10 gap-5">
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/bun.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/adonis.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/elysiajs.webp" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/express.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/go.jpg" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/Laravel.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/next.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/node.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/react.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/rust.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/springboot.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/svelte.png" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/tailwind.webp" className=" " alt="" />
-                      </a>
-                      <a href="" className=' h-6 w-6 md:h-10  md:w-10 flex justify-center items-center rounded-full '>
-                        <img src="/skill/tauri.svg" className=" " alt="" />
-                      </a>
-                    </div>
+            <h4 className=" mt-12">What you can expect from me?</h4>
+            <div className=" lg:flex-row flex-col-reverse flex  max-w-[1200px] justify-center ">
+                <div className="lg:w-1/2 lg:py-10 slider-container ">
+                  <InfiniteSlider />
+                  <InfiniteSliderReverse />
                 </div>
                 <div className="lg:w-1/2">
-                    <p className=" my-10" >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro iste illum eius consequuntur quod nobis, adipisci aliquam odit esse vel?
+                    <p className=" my-10 font-light" >
+                      I specialize in building microservices, from selecting the tech stack and designing architecture to deployment. I can develop both web apps and IoT-integrated systems using MQTT, with expertise in microcontrollers like Arduino, ESP, ATtiny, and SBCs as needed.I can also help you create an interactive and fresh website, whether static or dynamic.
                     </p>
-                    <Button text='More aboute me' />
+                <Button text='More aboute me' />
                 </div>
             </div>
         </div>
@@ -165,8 +174,8 @@ const Home = () => {
             SOME THE MOST IMPRESIVE PROJECT I HAVE WORKED
           </h2>
           <div className="lg:flex-1 flex flex-col justify-center">
-              <p className="mb-10">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis harum iste rem rerum adipisci quos consequatur facere, assumenda sed. Incidunt!
+              <p className="mb-10 font-light">
+              I have worked on various projects, ranging from websites and design to IoT. Here are some of the most impressive ones.  
               </p>
                 <Button text='See all project' />
           </div>
@@ -175,11 +184,14 @@ const Home = () => {
 
       <Project 
         title={"Trash Go"}
-        body="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem obcaecati necessitatibus, veritatis voluptates adipisci modi dolores nihil repellendus molestiae! Excepturi."
+        body="Trash Go is an interactive website designed to educate the public, especially about the waste around us. I created this website while participating in the AWS Cloud Computing Club Competition for static websites."
         img={'/project/trash-go.png'}
+        bg='bg-green-200'
+        gsap='project1'
+
         desc={(
           <>
-            <p>Category: Frontend</p>
+            <p>Category: Static Website</p>
             <p>Role: team lead & frontend</p>
           </>
         )}
@@ -192,23 +204,46 @@ const Home = () => {
 
       <Project 
         title={"Traditional Instrument"}
-        body="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem obcaecati necessitatibus, veritatis voluptates adipisci modi dolores nihil repellendus molestiae! Excepturi."
+        body="During the next AWS Cloud Computing Competition, I created 'Traditional Instruments,' an interactive educational site featuring sounds and playable traditional musical instruments."
         img={'/project/traditional-instrument.png'}
+        bg={'bg-amber-900'}
+        gsap='project2'
         desc={(
           <>
-            <p>Category: Frontend</p>
+            <p>Category: Interactive Web apps</p>
             <p>Role: team lead & frontend</p>
           </>
         )}
       />
 
-      <section className=" flex flex-col items-center justify-center text-black p-10 "> 
+      <div className=" h-[10px] mt-5 flex justify-center" >
+        <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20">
+        </div>
+      </div>
+
+      <Project 
+        title={"Absensi With RFID CARD"}
+        body="My team and I developed an RFID card-based attendance system using the ESP32 S2 Mini microcontroller. Originally a project challenge from alumni, it evolved into full production with 25 units."
+        img={'/project/AbsensiRFID.png'}
+        bg={'bg-gray-300'}
+        gsap='project3'
+        desc={(
+          <>
+            <p>Category: IoT & Fullstack</p>
+            <p>Role: team lead & IoT</p>
+          </>
+        )}
+      />
+
+      <section className="  flex flex-col items-center justify-center text-black p-10 "> 
           <div className="  max-w-[1400px] w-full flex flex-col items-center justify-between ">
             <div className=" md:flex-1 ">
               <p>Have Idea for project?</p>
               <h2 className=" mb-10 text-6xl md:text-8xl lg:text-9xl">Got some idea and want to realize it?</h2>
             <div className=" flex justify-end">
-              <Button text={"Let's work together"}/>
+              <div className=" scale-150 translate-x-[-80px]">
+                <Button text={"Let's work together"}/>
+              </div>
             </div>
             </div>
           </div>
