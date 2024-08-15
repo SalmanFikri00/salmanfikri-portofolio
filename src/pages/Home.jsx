@@ -130,8 +130,10 @@ const Home = () => {
      <Cursor />
      <Tirai />
       <section className='relative bg-stone-950 h-screen flex flex-col justify-end p-10 shadow-2xl'>
-        <div className="w-full h-full overflow-hidden flex justify-center absolute top-0 bottom-0">
-          {/* <img className='h-[150%] w-fit ' src="/myPhoto.jpg" alt="" width='100vw'/> */}
+        <div className="w-full h-full overflow-hidden flex justify-center md:justify-end absolute top-0 bottom-0">
+          <div className="w-1/2 flex justify-center">
+            <img className=' drop-shadow-lg shadow-slate-100 absolute max-w-[400px] -bottom-12 -translate-x-10' src="/myPhoto.png" alt=""/>
+          </div>
         </div>
         <div>
           <h1 className="text-3xl font-bold text-shadow-sm lg:text-8xl md:text-6xl sm:text-4xl  ">
