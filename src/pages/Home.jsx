@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect } from "react"
 import Navbar from "../components/Navbar"
-import LocomotiveScroll from 'locomotive-scroll';
 import Button from "../components/Button";
 import Project from "../components/Project";
 import Medsos from "../components/Medsos";
@@ -94,38 +93,13 @@ const Home = () => {
           })
 
         })
-        
-
-        const locomotiveScroll = new LocomotiveScroll({
-          autoStart: false,
-          lenisOptions: {
-              wrapper: window,
-              content: body,
-              lerp: 0.05,
-              duration: 1.5,
-              orientation: 'vertical',
-              gestureOrientation: 'vertical',
-              smoothWheel: true,
-              smoothTouch: true,
-              wheelMultiplier: 1.5,
-              touchMultiplier: 2,
-              normalizeWheel: true,
-              easing: (t) => t < 0.5 
-              ? 16 * t * t * t * t * t 
-              : 1 - Math.pow(-2 * t + 2, 5) / 2
-            },
-          });
-
-          setTimeout(() => {
-            locomotiveScroll.start();
-        }, 3300)
           
         }, [])
 
 
 
   return (
-    <div data-scroll-section className="scroll-smooth text-white font-['Inter'] cursor-none overflow-hidden" id='body' >
+    <div className="scroll-smooth text-white font-['Inter'] cursor-none overflow-hidden" id='body' >
      <Navbar />
      <Cursor />
      <Tirai />
