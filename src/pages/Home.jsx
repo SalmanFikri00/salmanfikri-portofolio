@@ -17,6 +17,48 @@ import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/locomotive-scroll.css";
 
 const Home = () => {
+  const projects = [
+    {
+      title: "Trash Go",
+      body: "Trash Go is an interactive website designed to educate the public, especially about the waste around us. I created this website while participating in the AWS Cloud Computing Club Competition for static websites.",
+      img: "/project/trash-go.png",
+      bg: "bg-green-200",
+      gsap: "project1",
+      desc: (
+        <>
+          <p>Category: Static Website</p>
+          <p>Role: team lead & frontend</p>
+        </>
+      ),
+    },
+    {
+      title: "Traditional Instrument",
+      body: "During the next AWS Cloud Computing Competition, I created 'Traditional Instruments,' an interactive educational site featuring sounds and playable traditional musical instruments.",
+      img: "/project/traditional-instrument.png",
+      bg: "bg-amber-900",
+      gsap: "project2",
+      desc: (
+        <>
+          <p>Category: Interactive Web apps</p>
+          <p>Role: team lead & frontend</p>
+        </>
+      ),
+    },
+    {
+      title: "Smart Home",
+      body: "With this project, I created an IoT-based smart home system that integrates with several devices, including a smart lamp, air conditioner, and smart door lock. This project was made with a custom PCB and a custom casing.",
+      img: "/project/smart-home.png",
+      bg: "bg-cyan-900",
+      gsap: "project3",
+      desc: (
+        <>
+          <p>Category: IoT system</p>
+          <p>Role: Project Owner, Frontend & Backend</p>
+        </>
+      ),
+    },
+  ];
+
   let url = import.meta.env
   console.log(url)
   gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
@@ -116,7 +158,7 @@ const Home = () => {
 
   return (
     <div
-      className="scroll-smooth text-white font-['Inter'] cursor-none overflow-hidden"
+      className="scroll-smooth text-white font-['Inter']"
       id="body"
       data-scroll-container
     >
@@ -124,26 +166,40 @@ const Home = () => {
       <Cursor />
       <Tirai />
       <section
+        id="hero"
         data-scroll-section
-        className="flex relative flex-col justify-end p-10 h-screen shadow-2xl bg-stone-950"
+        className="relative flex min-h-screen px-4 py-20 bg-white sm:px-6 lg:px-8"
       >
-        <div className="flex absolute top-0 bottom-0 justify-center w-full h-full md:justify-end">
-          <div className="flex justify-center w-1/2">
-            <img
-              className="text-header shadow-white drop-shadow-xl absolute max-w-[800px] -bottom-0 -translate-x-14"
-              src="/myPhoto.png"
-              alt=""
-            />
-          </div>
+        {/* Top Left Logo/Text (Assuming Navbar handles this or it's a separate component) */}
+
+        {/* Right Side Navigation/Categories Placeholder */}
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col space-y-4 text-sm font-medium text-gray-400 uppercase tracking-widest">
+          <p className="hover:text-black transition-colors duration-200">UI/UX</p>
+          <p className="hover:text-black transition-colors duration-200">Branding</p>
+          <p className="hover:text-black transition-colors duration-200">Mobile App</p>
+          <p className="hover:text-black transition-colors duration-200">Website Design</p>
         </div>
-        <div className="py-14 md:px-0">
-          <h1 className="text-3xl font-bold text-shadow-sm lg:text-8xl md:text-6xl sm:text-4xl">
-            <p className="text-header">FULLSTACK </p>
-            <p className="text-header">
-              WEB <span className="font-thin">|</span> Cloud{" "}
-              <span className="font-thin">|</span> IoT
-            </p>
-          </h1>
+
+        <div className="relative z-10 flex flex-col justify-between w-full h-full max-w-7xl mx-auto pt-24 pb-12">
+          <div className="flex-grow flex items-center justify-start">
+            <div className="max-w-4xl text-left">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight text-black">
+                I&apos;m a Fullstack Developer
+                <br />
+                <span className="text-gray-500">a great experiences</span>
+              </h1>
+              <p className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl">
+                I&apos;m Salman Fikri, a Fullstack living in Jakarta, and I focus on making digital product that are easy to use, enjoyable, and get the job done.
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom Left Social Media Links Placeholder */}
+          <div className="flex mt-4 space-x-6 text-sm font-medium text-gray-700 uppercase tracking-wide">
+            <a href="https://www.instagram.com/msf.dev/" className="hover-pointer before:bg-black">Instagram</a>
+            <a href="https://www.linkedin.com/in/m-salman-al-fikri-b28201265/" className="hover-pointer before:bg-black">Linked In</a>
+            <a href="https://github.com/SalmanFikri00/" className="hover-pointer before:bg-black">Github</a>
+          </div>
         </div>
       </section>
       <section
@@ -204,55 +260,23 @@ const Home = () => {
         </div>
       </section>
 
-      <Project
-        title={"Trash Go"}
-        body="Trash Go is an interactive website designed to educate the public, especially about the waste around us. I created this website while participating in the AWS Cloud Computing Club Competition for static websites."
-        img={"/project/trash-go.png"}
-        bg="bg-green-200"
-        gsap="project1"
-        desc={
-          <>
-            <p>Category: Static Website</p>
-            <p>Role: team lead & frontend</p>
-          </>
-        }
-      />
-
-      <div className=" h-[10px] mt-5 flex justify-center">
-        <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20"></div>
-      </div>
-
-      <Project
-        title={"Traditional Instrument"}
-        body="During the next AWS Cloud Computing Competition, I created 'Traditional Instruments,' an interactive educational site featuring sounds and playable traditional musical instruments."
-        img={"/project/traditional-instrument.png"}
-        bg={"bg-amber-900"}
-        gsap="project2"
-        desc={
-          <>
-            <p>Category: Interactive Web apps</p>
-            <p>Role: team lead & frontend</p>
-          </>
-        }
-      />
-
-      <div className=" h-[10px] mt-5 flex justify-center">
-        <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20"></div>
-      </div>
-
-      <Project
-        title={"Absensi With RFID CARD"}
-        body="My team and I developed an RFID card-based attendance system using the ESP32 S2 Mini microcontroller. Originally a project challenge from alumni, it evolved into full production with 25 units."
-        img={"/project/AbsensiRFID.png"}
-        bg={"bg-gray-300"}
-        gsap="project3"
-        desc={
-          <>
-            <p>Category: IoT & Fullstack</p>
-            <p>Role: team lead & IoT</p>
-          </>
-        }
-      />
+      {projects.map((project, index) => (
+        <div key={index}>
+          <Project
+            title={project.title}
+            body={project.body}
+            img={project.img}
+            bg={project.bg}
+            gsap={project.gsap}
+            desc={project.desc}
+          />
+          {index < projects.length - 1 && (
+            <div className=" h-[10px] mt-5 flex justify-center">
+              <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20"></div>
+            </div>
+          )}
+        </div>
+      ))}
 
       <section
         data-scroll-section
@@ -296,7 +320,7 @@ const Home = () => {
               <div className="flex gap-3">
                 <p className="overflow-hidden relative">
                   <a
-                    href="https://www.instagram.com/msf.dev_0078/"
+                    href="https://www.instagram.com/msf.dev/"
                     className="hover-pointer before:bg-black"
                   >
                     Instagram
