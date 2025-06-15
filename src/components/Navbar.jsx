@@ -42,7 +42,7 @@ const closeNav = () => {
     <nav className=" z-50 fixed top-0 left-0 right-0 px-4 py-6 navbar bg-white shadow-sm ">
     <div className='flex w-full justify-between items-center max-w-7xl mx-auto'>
       <div className="font-bold text-lg text-black">
-        <p className="">showcasy.</p>
+        <p className="">salmanfikri.</p>
       </div>
       <div className="flex items-center space-x-4" >
         <a href="#contact" className="flex items-center px-4 py-2 text-black border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200">
