@@ -382,7 +382,7 @@ const Home = () => {
               />
               {index < filteredProjects.length - 1 && (
                 <div className="flex justify-center items-center px-10 py-5">
-                  <div className="w-full max-w-[1400px] rounded-full h-[3px] bg-black opacity-20"></div>
+                  <div className="w-full max-w-[1200px] rounded-full h-[3px] bg-black opacity-20"></div>
                 </div>
               )}
             </div>

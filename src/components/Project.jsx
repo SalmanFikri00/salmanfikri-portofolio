@@ -11,7 +11,7 @@ const Project = ({img, title, body, categories, roles, bg = "bg-neutral-200" , g
 
   return (
     <section className="lg:flex justify-center items-center text-black py-10 ">
-    <div className="flex flex-col-reverse lg:flex-row gap-10 md:gap-20 w-full max-w-[1400px]">
+    <div className="flex flex-col-reverse lg:flex-row gap-10 md:gap-20 w-full max-w-[1200px]">
       <div className=" lg:flex-1 flex flex-col justify-between">
         <div className={"project relative "}>
           <h1 className={" text-4xl mb-5 "+gsap}>
@@ -36,13 +36,13 @@ const Project = ({img, title, body, categories, roles, bg = "bg-neutral-200" , g
         )}
       </div>
       <div className="lg:flex h-full">
-        <div className={` ${bg} rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl max-h-[300px] max-w-[400px]`}>
+        <div className={` ${bg} rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl max-h-[450px] max-w-[600px]`}>
           {hasImage ? (
-            <div className="relative overflow-hidden rounded-lg group max-h-[300px] max-w-[400px] flex justify-center">
+            <div className="relative overflow-hidden rounded-lg group max-h-[450px] max-w-[600px] flex justify-center">
               <img
                 src={img}
                 alt={title}
-                className="h-full w-auto transition-transform max-h-[300px] max-w-[400px] rounded-2xl duration-500 ease-out group-hover:scale-105"
+                className="h-full w-auto transition-transform max-h-[450px] max-w-[600px] rounded-2xl duration-500 ease-out group-hover:scale-105"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
