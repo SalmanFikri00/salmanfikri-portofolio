@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { usePageTransition } from "../context/PageTransitionContext";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Project from "../components/Project";
@@ -23,6 +23,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
 const DEFAULT_ACCENT_COLOR = "bg-neutral-200";
 
 const Home = () => {
+  const { transitionToPage } = usePageTransition();
   const [projects, setProjects] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
@@ -316,9 +317,9 @@ const Home = () => {
                 SBCs as needed.I can also help you create an interactive and
                 fresh website, whether static or dynamic.
               </p>
-              <Link to="/about">
+              <div onClick={() => transitionToPage('/about')} style={{ cursor: 'pointer' }}>
                 <Button text="More about me" />
-              </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -340,9 +341,9 @@ const Home = () => {
               I have worked on various projects, ranging from websites and
               design to IoT. Here are some of the most impressive ones.
             </p>
-            <Link to="/projects">
+            <div onClick={() => transitionToPage('/projects')} style={{ cursor: 'pointer' }}>
               <Button text="See all project" />
-            </Link>
+            </div>
           </div>
         </div>
       </section>

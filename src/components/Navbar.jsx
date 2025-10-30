@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { usePageTransition } from '../context/PageTransitionContext'
 import '../App.css'
 
 
@@ -9,6 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { transitionToPage } = usePageTransition();
 
   useEffect(() => {
     const nav = document.querySelector('.navbar')
@@ -32,18 +34,24 @@ const Navbar = () => {
     setIsOpen(false);
   }
 
+  const handleNavClick = (e, path) => {
+    e.preventDefault();
+    closeNav();
+    transitionToPage(path);
+  };
+
   const handleContactClick = (e) => {
     e.preventDefault();
     closeNav();
 
     if (location.pathname !== '/') {
-      navigate('/');
+      transitionToPage('/');
       setTimeout(() => {
         const contactSection = document.querySelector('#contact');
         if (contactSection) {
           contactSection.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 1300); // Wait for transition to complete
     } else {
       const contactSection = document.querySelector('#contact');
       if (contactSection) {
@@ -57,9 +65,9 @@ const Navbar = () => {
   return (
     <nav className=" z-50 fixed top-0 left-0 right-0 px-4 py-6 navbar bg-white shadow-sm ">
     <div className='flex w-full justify-between items-center max-w-7xl mx-auto'>
-      <Link to="/" className="font-bold text-lg text-black">
+      <a href="/" onClick={(e) => handleNavClick(e, '/')} className="font-bold text-lg text-black">
         <p className="">salmanfikri.</p>
-      </Link>
+      </a>
       <div className="flex items-center space-x-4" >
         <a href="#contact" onClick={handleContactClick} className="flex items-center px-4 py-2 text-black border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200">
           Let&apos;s Talk <span className="ml-2">→</span>
@@ -90,13 +98,13 @@ const Navbar = () => {
 
             <div className=" flex-col gap-10 flex md:w-1/3 lg:w-1/4 justify-between cursor-none text-shadow text-black" >
               <p className='relative overflow-hidden'>
-                <Link to="/" className="hover-pointer" onClick={closeNav}>Home</Link>
+                <a href="/" className="hover-pointer" onClick={(e) => handleNavClick(e, '/')}>Home</a>
               </p>
               <p className='relative overflow-hidden'>
-                <Link to="/about" className="hover-pointer" onClick={closeNav}>About</Link>
+                <a href="/about" className="hover-pointer" onClick={(e) => handleNavClick(e, '/about')}>About</a>
               </p>
               <p className='relative overflow-hidden'>
-                <Link to="/projects" className="hover-pointer" onClick={closeNav}>Projects</Link>
+                <a href="/projects" className="hover-pointer" onClick={(e) => handleNavClick(e, '/projects')}>Projects</a>
               </p>
               <p className='relative overflow-hidden'>
                 <a href="#contact" className="hover-pointer" onClick={handleContactClick}>Contact</a>
