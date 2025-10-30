@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { usePageTransition } from "../context/PageTransitionContext";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Project from "../components/Project";
@@ -15,53 +16,121 @@ import CustomEase from "gsap/CustomEase";
 import InfiniteSliderReverse from "../components/InfiniteSliderReverse";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/locomotive-scroll.css";
+import { supabaseClient } from "../lib/supabaseClient";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
+
+const DEFAULT_ACCENT_COLOR = "bg-neutral-200";
 
 const Home = () => {
-  const projects = [
-    {
-      title: "Trash Go",
-      body: "Trash Go is an interactive website designed to educate the public, especially about the waste around us. I created this website while participating in the AWS Cloud Computing Club Competition for static websites.",
-      img: "/project/trash-go.png",
-      bg: "bg-green-200",
-      gsap: "project1",
-      desc: (
-        <>
-          <p>Category: Static Website</p>
-          <p>Role: team lead & frontend</p>
-        </>
-      ),
-    },
-    {
-      title: "Traditional Instrument",
-      body: "During the next AWS Cloud Computing Competition, I created 'Traditional Instruments,' an interactive educational site featuring sounds and playable traditional musical instruments.",
-      img: "/project/traditional-instrument.png",
-      bg: "bg-amber-900",
-      gsap: "project2",
-      desc: (
-        <>
-          <p>Category: Interactive Web apps</p>
-          <p>Role: team lead & frontend</p>
-        </>
-      ),
-    },
-    {
-      title: "Smart Home",
-      body: "With this project, I created an IoT-based smart home system that integrates with several devices, including a smart lamp, air conditioner, and smart door lock. This project was made with a custom PCB and a custom casing.",
-      img: "/project/smart-home.png",
-      bg: "bg-cyan-900",
-      gsap: "project3",
-      desc: (
-        <>
-          <p>Category: IoT system</p>
-          <p>Role: Project Owner, Frontend & Backend</p>
-        </>
-      ),
-    },
-  ];
+  const { transitionToPage } = usePageTransition();
+  const [projects, setProjects] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [isLoadingProjects, setIsLoadingProjects] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  let url = import.meta.env
-  console.log(url)
-  gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadContent = async () => {
+      setIsLoadingProjects(true);
+      setHasError(false);
+      try {
+        const [{ data: categoryRows, error: categoriesError }, { data: projectRows, error: projectsError }] =
+          await Promise.all([
+            supabaseClient
+              .from("categories")
+              .select("id, name, slug")
+              .eq("is_active", true)
+              .order("name", { ascending: true }),
+            supabaseClient
+              .from("project_with_categories")
+              .select("id, title, summary, body, image_url, accent_color, project_url, roles, created_at, categories")
+              .eq("is_published", true)
+              .order("created_at", { ascending: false }),
+          ]);
+
+        if (categoriesError) {
+          console.error(categoriesError);
+          setHasError(true);
+        }
+
+        if (projectsError) {
+          console.error(projectsError);
+          setHasError(true);
+        }
+
+        if (!isMounted) return;
+
+        setCategories(categoryRows ?? []);
+
+        if (projectRows && projectRows.length > 0) {
+          const formattedProjects = projectRows.map((project, index) => ({
+            ...project,
+            categories: Array.isArray(project.categories) ? project.categories : [],
+            roles: Array.isArray(project.roles) ? project.roles : [],
+            gsapKey: `project${index + 1}`,
+          }));
+          setProjects(formattedProjects);
+        } else {
+          setProjects([]);
+        }
+      } catch (error) {
+        console.error(error);
+        if (!isMounted) return;
+        setHasError(true);
+        setProjects([]);
+        setCategories([]);
+      } finally {
+        if (isMounted) {
+          setIsLoadingProjects(false);
+        }
+      }
+    };
+
+    loadContent();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (activeCategory === "all") {
+      return projects;
+    }
+
+    return projects.filter((project) =>
+      project.categories?.some((category) => category.slug === activeCategory),
+    );
+  }, [activeCategory, projects]);
+
+  const categoriesWithAll = useMemo(
+    () => [
+      { id: "all", name: "All Projects", slug: "all" },
+      ...categories.map((category) => ({
+        id: category.id,
+        name: category.name,
+        slug: category.slug,
+      })),
+    ],
+    [categories],
+  );
+
+  const handleCategorySelect = (slug) => {
+    setActiveCategory(slug);
+  };
+
+  useEffect(() => {
+    if (activeCategory === "all") return;
+    const categoryExists = categories.some((category) => category.slug === activeCategory);
+
+    if (!categoryExists) {
+      setActiveCategory("all");
+    }
+  }, [categories, activeCategory]);
+
 
   useGSAP(() => {
     gsap.from(".text-header", {
@@ -109,7 +178,7 @@ const Home = () => {
       x: -200,
       stagger: 0.1,
     });
-  });
+  }, [filteredProjects.length]);
 
   useEffect(() => {
     
@@ -172,29 +241,44 @@ const Home = () => {
       >
         {/* Top Left Logo/Text (Assuming Navbar handles this or it's a separate component) */}
 
-        {/* Right Side Navigation/Categories Placeholder */}
+        {/* Right Side Navigation/Categories */}
         <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col space-y-4 text-sm font-medium text-gray-400 uppercase tracking-widest">
-          <p className="hover:text-black transition-colors duration-200">UI/UX</p>
-          <p className="hover:text-black transition-colors duration-200">Branding</p>
-          <p className="hover:text-black transition-colors duration-200">Mobile App</p>
-          <p className="hover:text-black transition-colors duration-200">Website Design</p>
+          <p className="hover:text-black transition-colors duration-200">Entrepreneur</p>
+          <p className="hover:text-black transition-colors duration-200">Fast Learner</p>
+          <p className="hover:text-black transition-colors duration-200">Tech Enthusiast</p>
+          <p className="hover:text-black transition-colors duration-200">Photographer</p>
         </div>
 
         <div className="relative z-10 flex flex-col justify-between w-full h-full max-w-7xl mx-auto pt-24 pb-12">
-          <div className="flex-grow flex items-center justify-start">
+          <div className="flex-grow flex items-center justify-between gap-10 lg:gap-20">
             <div className="max-w-4xl text-left">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight text-black">
-                I&apos;m a Fullstack Developer
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] text-black tracking-tight">
+                I&apos;m a{" "}
+                <span className="relative inline-block">
+                  <span className="relative z-10">Fullstack</span>
+                  <span className="absolute bottom-2 left-0 w-full h-3 bg-black/10 -skew-y-1"></span>
+                </span>
                 <br />
-                <span className="text-gray-500">a great experiences</span>
+                Developer
+                <br />
+                <span className="text-gray-400 font-light italic">great experiences</span>
               </h1>
-              <p className="mt-6 text-lg md:text-xl text-gray-700 max-w-2xl">
-                I&apos;m Salman Fikri, a Fullstack living in Jakarta, and I focus on making digital product that are easy to use, enjoyable, and get the job done.
+              <p className="mt-8 text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+                I&apos;m <span className="font-semibold text-black">Salman Fikri</span>, a Fullstack Developer living in Jakarta, and I focus on making digital products that are easy to use, enjoyable, and get the job done.
               </p>
+            </div>
+
+            {/* Profile Image */}
+            <div className="hidden lg:block">
+              <img
+                src="/salman.png"
+                alt="Salman Fikri"
+                className="w-[400px] h-auto xl:w-[600px]  drop-shadow-2xl"
+              />
             </div>
           </div>
 
-          {/* Bottom Left Social Media Links Placeholder */}
+          {/* Bottom Left Social Media Links */}
           <div className="flex mt-4 space-x-6 text-sm font-medium text-gray-700 uppercase tracking-wide">
             <a href="https://www.instagram.com/msf.dev/" className="hover-pointer before:bg-black">Instagram</a>
             <a href="https://www.linkedin.com/in/m-salman-al-fikri-b28201265/" className="hover-pointer before:bg-black">Linked In</a>
@@ -233,13 +317,15 @@ const Home = () => {
                 SBCs as needed.I can also help you create an interactive and
                 fresh website, whether static or dynamic.
               </p>
-              <Button text="More about me" />
+              <div onClick={() => transitionToPage('/about')} style={{ cursor: 'pointer' }}>
+                <Button text="More about me" />
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <div className=" h-[20px] mt-5 flex justify-center">
-        <div className="w-[80vw] rounded-full h-[5px] bg-black opacity-50"></div>
+      <div className="h-[20px] mt-5 flex justify-center px-10">
+        <div className="w-full max-w-[1400px] rounded-full h-[5px] bg-black opacity-50"></div>
       </div>
       <section
         data-scroll-section
@@ -255,28 +341,75 @@ const Home = () => {
               I have worked on various projects, ranging from websites and
               design to IoT. Here are some of the most impressive ones.
             </p>
-            <Button text="See all project" />
+            <div onClick={() => transitionToPage('/projects')} style={{ cursor: 'pointer' }}>
+              <Button text="See all project" />
+            </div>
           </div>
         </div>
       </section>
 
-      {projects.map((project, index) => (
-        <div key={index}>
-          <Project
-            title={project.title}
-            body={project.body}
-            img={project.img}
-            bg={project.bg}
-            gsap={project.gsap}
-            desc={project.desc}
-          />
-          {index < projects.length - 1 && (
-            <div className=" h-[10px] mt-5 flex justify-center">
-              <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20"></div>
+      <div className="flex flex-wrap items-center justify-center gap-3 px-6 pb-10 text-xs uppercase tracking-[0.3em] text-black">
+        {categoriesWithAll.map((category) => {
+          const isActive = activeCategory === category.slug;
+
+          return (
+            <button
+              key={category.id}
+              type="button"
+              onClick={() => handleCategorySelect(category.slug)}
+              className={`rounded-full border px-5 py-2 transition ${
+                isActive ? "bg-black text-white border-black" : "border-black/30 hover:border-black"
+              }`}
+            >
+              {category.name}
+            </button>
+          );
+        })}
+      </div>
+
+      {isLoadingProjects && (
+        <p className="text-center text-sm uppercase tracking-[0.3em] text-black/60">
+          Loading projects...
+        </p>
+      )}
+
+      {!isLoadingProjects && hasError && (
+        <p className="text-center text-sm uppercase tracking-[0.3em] text-red-500">
+          Failed to load projects. Please try again later.
+        </p>
+      )}
+
+      {!isLoadingProjects && !hasError && filteredProjects.length === 0 && (
+        <p className="text-center text-sm uppercase tracking-[0.3em] text-black/60">
+          No projects found for this category yet.
+        </p>
+      )}
+
+      <div className="w-full">
+        {filteredProjects.map((project, index) => {
+          const projectGsap = project.gsapKey ?? `project${index + 1}`;
+
+          return (
+            <div key={project.id ?? project.slug ?? index}>
+              <Project
+                title={project.title}
+                body={project.summary ?? project.body ?? ""}
+                img={project.image_url}
+                bg={project.accent_color ?? DEFAULT_ACCENT_COLOR}
+                gsap={projectGsap}
+                projectUrl={project.project_url}
+                categories={project.categories}
+                roles={project.roles}
+              />
+              {index < filteredProjects.length - 1 && (
+                <div className="flex justify-center items-center px-10 py-5">
+                  <div className="w-full max-w-[1200px] rounded-full h-[3px] bg-black opacity-20"></div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      ))}
+          );
+        })}
+      </div>
 
       <section
         data-scroll-section
