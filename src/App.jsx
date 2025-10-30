@@ -2,6 +2,8 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
+import About from './pages/About';
+import Projects from './pages/Projects';
 import useScrollToTop from './useScrollToTop';
 import { AdminSessionProvider } from './context/AdminSessionContext';
 import AdminRoute from './components/AdminRoute';
@@ -15,6 +17,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/projects' element={<Projects />} />
       <Route path='/admin/00/login' element={<AdminLogin />} />
       <Route element={<AdminRoute />}>
         <Route path='/admin/00/dashboard' element={<AdminDashboard />} />

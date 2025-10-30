@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Project from "../components/Project";
@@ -315,7 +316,9 @@ const Home = () => {
                 SBCs as needed.I can also help you create an interactive and
                 fresh website, whether static or dynamic.
               </p>
-              <Button text="More about me" />
+              <Link to="/about">
+                <Button text="More about me" />
+              </Link>
             </div>
           </div>
         </div>
@@ -337,7 +340,9 @@ const Home = () => {
               I have worked on various projects, ranging from websites and
               design to IoT. Here are some of the most impressive ones.
             </p>
-            <Button text="See all project" />
+            <Link to="/projects">
+              <Button text="See all project" />
+            </Link>
           </div>
         </div>
       </section>

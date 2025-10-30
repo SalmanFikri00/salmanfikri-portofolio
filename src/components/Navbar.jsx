@@ -1,51 +1,67 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import '../App.css'
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-
-
-
-
     const nav = document.querySelector('.navbar')
-    // const menu = document.querySelector('.menu') // This line is no longer needed
- 
-  window.addEventListener('scroll' , () => {
-    // console.log(window.visualViewport.height)
-    if(window.visualViewport.height - 50 < scrollY){
-      nav.classList.add('text-black')
-      nav.classList.add('black')
 
-    }else{
-      nav.classList.remove('text-black')
-      nav.classList.remove('black')
+    window.addEventListener('scroll' , () => {
+      if(window.visualViewport.height - 50 < scrollY){
+        nav.classList.add('text-black')
+        nav.classList.add('black')
+      }else{
+        nav.classList.remove('text-black')
+        nav.classList.remove('black')
+      }
+    })
+  }, [])
+
+  const openNav = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const closeNav = () => {
+    setIsOpen(false);
+  }
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    closeNav();
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const contactSection = document.querySelector('#contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const contactSection = document.querySelector('#contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
-  })
-}, [])
-
-const openNav = () => {
-  setIsOpen(!isOpen);
-}
-
-const closeNav = () => {
-  setIsOpen(false);
-}
+  }
 
 
 
   return (
     <nav className=" z-50 fixed top-0 left-0 right-0 px-4 py-6 navbar bg-white shadow-sm ">
     <div className='flex w-full justify-between items-center max-w-7xl mx-auto'>
-      <div className="font-bold text-lg text-black">
+      <Link to="/" className="font-bold text-lg text-black">
         <p className="">salmanfikri.</p>
-      </div>
+      </Link>
       <div className="flex items-center space-x-4" >
-        <a href="#contact" className="flex items-center px-4 py-2 text-black border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200">
+        <a href="#contact" onClick={handleContactClick} className="flex items-center px-4 py-2 text-black border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200">
           Let&apos;s Talk <span className="ml-2">→</span>
         </a>
         <div className={`md:hidden flex flex-col items-center justify-center w-10 h-10 transition-colors duration-200`} onClick={openNav} >
@@ -71,14 +87,23 @@ const closeNav = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </div>
-      
+
             <div className=" flex-col gap-10 flex md:w-1/3 lg:w-1/4 justify-between cursor-none text-shadow text-black" >
-              <p className='relative overflow-hidden'><a href="#aboutme" className="hover-pointer" onClick={() => setIsOpen(false)}>About me</a></p>
-              <p className='relative overflow-hidden'><a href="#project" className="hover-pointer" onClick={() => setIsOpen(false)}>Project</a></p>
-              <p className='relative overflow-hidden'><a href="#contact" className="hover-pointer" onClick={() => setIsOpen(false)}>Contact</a></p>
-            </div> 
+              <p className='relative overflow-hidden'>
+                <Link to="/" className="hover-pointer" onClick={closeNav}>Home</Link>
+              </p>
+              <p className='relative overflow-hidden'>
+                <Link to="/about" className="hover-pointer" onClick={closeNav}>About</Link>
+              </p>
+              <p className='relative overflow-hidden'>
+                <Link to="/projects" className="hover-pointer" onClick={closeNav}>Projects</Link>
+              </p>
+              <p className='relative overflow-hidden'>
+                <a href="#contact" className="hover-pointer" onClick={handleContactClick}>Contact</a>
+              </p>
+            </div>
             <div className=" flex gap-5  cursor-none text-lg text-shadow text-black">
-              <a href="https://www.instagram.com/msf.dev_0078/" className='relative overflow-hidden '><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
+              <a href="https://www.instagram.com/msf.dev/" className='relative overflow-hidden '><p className='hover-pointer'><i className="fa-brands fa-instagram"></i></p></a>
               <a href="https://www.linkedin.com/in/m-salman-al-fikri-b28201265/" className='relative overflow-hidden'><p className='hover-pointer '><i className="fa-brands fa-linkedin"></i></p></a>
               <a href="https://github.com/SalmanFikri00" className='relative overflow-hidden'><p className='hover-pointer'><i className="fa-brands fa-github-alt"></i></p></a>
             </div>
