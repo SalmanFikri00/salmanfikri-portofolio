@@ -3,18 +3,32 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import useScrollToTop from './useScrollToTop';
+import { AdminSessionProvider } from './context/AdminSessionContext';
+import AdminRoute from './components/AdminRoute';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 
 
-const App = () => {
-  // useScrollToTop()
+const AppRoutes = () => {
+  useScrollToTop();
 
   return (
-    <BrowserRouter>
-        <Routes>
-          <Route path='/' element={ <Home />} />
-        </Routes>
-      </BrowserRouter>
-  )
-}
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/admin/00/login' element={<AdminLogin />} />
+      <Route element={<AdminRoute />}>
+        <Route path='/admin/00/dashboard' element={<AdminDashboard />} />
+      </Route>
+    </Routes>
+  );
+};
+
+const App = () => (
+  <BrowserRouter>
+    <AdminSessionProvider>
+      <AppRoutes />
+    </AdminSessionProvider>
+  </BrowserRouter>
+);
 
 export default App

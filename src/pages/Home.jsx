@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Project from "../components/Project";
@@ -15,53 +15,145 @@ import CustomEase from "gsap/CustomEase";
 import InfiniteSliderReverse from "../components/InfiniteSliderReverse";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/locomotive-scroll.css";
+import { supabaseClient } from "../lib/supabaseClient";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
+
+const DEFAULT_ACCENT_COLOR = "bg-neutral-200";
 
 const Home = () => {
-  const projects = [
-    {
-      title: "Trash Go",
-      body: "Trash Go is an interactive website designed to educate the public, especially about the waste around us. I created this website while participating in the AWS Cloud Computing Club Competition for static websites.",
-      img: "/project/trash-go.png",
-      bg: "bg-green-200",
-      gsap: "project1",
-      desc: (
-        <>
-          <p>Category: Static Website</p>
-          <p>Role: team lead & frontend</p>
-        </>
-      ),
-    },
-    {
-      title: "Traditional Instrument",
-      body: "During the next AWS Cloud Computing Competition, I created 'Traditional Instruments,' an interactive educational site featuring sounds and playable traditional musical instruments.",
-      img: "/project/traditional-instrument.png",
-      bg: "bg-amber-900",
-      gsap: "project2",
-      desc: (
-        <>
-          <p>Category: Interactive Web apps</p>
-          <p>Role: team lead & frontend</p>
-        </>
-      ),
-    },
-    {
-      title: "Smart Home",
-      body: "With this project, I created an IoT-based smart home system that integrates with several devices, including a smart lamp, air conditioner, and smart door lock. This project was made with a custom PCB and a custom casing.",
-      img: "/project/smart-home.png",
-      bg: "bg-cyan-900",
-      gsap: "project3",
-      desc: (
-        <>
-          <p>Category: IoT system</p>
-          <p>Role: Project Owner, Frontend & Backend</p>
-        </>
-      ),
-    },
-  ];
+  const [projects, setProjects] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [isLoadingProjects, setIsLoadingProjects] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
-  let url = import.meta.env
-  console.log(url)
-  gsap.registerPlugin(useGSAP, ScrollTrigger, CustomEase);
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadContent = async () => {
+      setIsLoadingProjects(true);
+      setHasError(false);
+      try {
+        const [{ data: categoryRows, error: categoriesError }, { data: projectRows, error: projectsError }] =
+          await Promise.all([
+            supabaseClient
+              .from("categories")
+              .select("id, name, slug")
+              .eq("is_active", true)
+              .order("name", { ascending: true }),
+            supabaseClient
+              .from("project_with_categories")
+              .select("id, title, summary, body, image_url, accent_color, project_url, roles, created_at, categories")
+              .eq("is_published", true)
+              .order("created_at", { ascending: false }),
+          ]);
+
+        if (categoriesError) {
+          console.error(categoriesError);
+          setHasError(true);
+        }
+
+        if (projectsError) {
+          console.error(projectsError);
+          setHasError(true);
+        }
+
+        if (!isMounted) return;
+
+        setCategories(categoryRows ?? []);
+
+        if (projectRows && projectRows.length > 0) {
+          const formattedProjects = projectRows.map((project, index) => ({
+            ...project,
+            categories: Array.isArray(project.categories) ? project.categories : [],
+            roles: Array.isArray(project.roles) ? project.roles : [],
+            gsapKey: `project${index + 1}`,
+          }));
+          setProjects(formattedProjects);
+        } else {
+          setProjects([]);
+        }
+      } catch (error) {
+        console.error(error);
+        if (!isMounted) return;
+        setHasError(true);
+        setProjects([]);
+        setCategories([]);
+      } finally {
+        if (isMounted) {
+          setIsLoadingProjects(false);
+        }
+      }
+    };
+
+    loadContent();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (activeCategory === "all") {
+      return projects;
+    }
+
+    return projects.filter((project) =>
+      project.categories?.some((category) => category.slug === activeCategory),
+    );
+  }, [activeCategory, projects]);
+
+  const categoriesWithAll = useMemo(
+    () => [
+      { id: "all", name: "All Projects", slug: "all" },
+      ...categories.map((category) => ({
+        id: category.id,
+        name: category.name,
+        slug: category.slug,
+      })),
+    ],
+    [categories],
+  );
+
+  const handleCategorySelect = (slug) => {
+    setActiveCategory(slug);
+  };
+
+  useEffect(() => {
+    if (activeCategory === "all") return;
+    const categoryExists = categories.some((category) => category.slug === activeCategory);
+
+    if (!categoryExists) {
+      setActiveCategory("all");
+    }
+  }, [categories, activeCategory]);
+
+  const renderProjectDetails = (project) => {
+    const categoryLabel =
+      project.categories && project.categories.length > 0
+        ? project.categories.map((category) => category.name).join(", ")
+        : "Uncategorized";
+
+    return (
+      <>
+        <p>Category: {categoryLabel}</p>
+        {project.roles && project.roles.length > 0 && <p>Role: {project.roles.join(", ")}</p>}
+        {project.project_url && (
+          <p>
+            <a
+              href={project.project_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover-pointer before:bg-black"
+            >
+              Visit project
+            </a>
+          </p>
+        )}
+      </>
+    );
+  };
 
   useGSAP(() => {
     gsap.from(".text-header", {
@@ -109,7 +201,7 @@ const Home = () => {
       x: -200,
       stagger: 0.1,
     });
-  });
+  }, [filteredProjects.length]);
 
   useEffect(() => {
     
@@ -260,23 +352,65 @@ const Home = () => {
         </div>
       </section>
 
-      {projects.map((project, index) => (
-        <div key={index}>
-          <Project
-            title={project.title}
-            body={project.body}
-            img={project.img}
-            bg={project.bg}
-            gsap={project.gsap}
-            desc={project.desc}
-          />
-          {index < projects.length - 1 && (
-            <div className=" h-[10px] mt-5 flex justify-center">
-              <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20"></div>
-            </div>
-          )}
-        </div>
-      ))}
+      <div className="flex flex-wrap items-center justify-center gap-3 px-6 pb-10 text-xs uppercase tracking-[0.3em] text-black">
+        {categoriesWithAll.map((category) => {
+          const isActive = activeCategory === category.slug;
+
+          return (
+            <button
+              key={category.id}
+              type="button"
+              onClick={() => handleCategorySelect(category.slug)}
+              className={`rounded-full border px-5 py-2 transition ${
+                isActive ? "bg-black text-white border-black" : "border-black/30 hover:border-black"
+              }`}
+            >
+              {category.name}
+            </button>
+          );
+        })}
+      </div>
+
+      {isLoadingProjects && (
+        <p className="text-center text-sm uppercase tracking-[0.3em] text-black/60">
+          Loading projects...
+        </p>
+      )}
+
+      {!isLoadingProjects && hasError && (
+        <p className="text-center text-sm uppercase tracking-[0.3em] text-red-500">
+          Failed to load projects. Please try again later.
+        </p>
+      )}
+
+      {!isLoadingProjects && !hasError && filteredProjects.length === 0 && (
+        <p className="text-center text-sm uppercase tracking-[0.3em] text-black/60">
+          No projects found for this category yet.
+        </p>
+      )}
+
+      {filteredProjects.map((project, index) => {
+        const projectGsap = project.gsapKey ?? `project${index + 1}`;
+
+        return (
+          <div key={project.id ?? project.slug ?? index}>
+            <Project
+              title={project.title}
+              body={project.summary ?? project.body ?? ""}
+              img={project.image_url}
+              bg={project.accent_color ?? DEFAULT_ACCENT_COLOR}
+              gsap={projectGsap}
+              projectUrl={project.project_url}
+              desc={renderProjectDetails(project)}
+            />
+            {index < filteredProjects.length - 1 && (
+              <div className=" h-[10px] mt-5 flex justify-center">
+                <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20"></div>
+              </div>
+            )}
+          </div>
+        );
+      })}
 
       <section
         data-scroll-section
