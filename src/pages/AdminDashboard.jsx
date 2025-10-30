@@ -7,7 +7,7 @@ import CategoryFormModal from '../components/dashboard/CategoryFormModal';
 import ProjectFormModal from '../components/dashboard/ProjectFormModal';
 import Cursor from '../components/Cursor';
 
-const PROJECT_IMAGE_BUCKET = 'project-images';
+const PROJECT_IMAGE_BUCKET = 'projects';
 
 const slugify = (value = '') =>
   value

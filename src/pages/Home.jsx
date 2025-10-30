@@ -129,31 +129,6 @@ const Home = () => {
     }
   }, [categories, activeCategory]);
 
-  const renderProjectDetails = (project) => {
-    const categoryLabel =
-      project.categories && project.categories.length > 0
-        ? project.categories.map((category) => category.name).join(", ")
-        : "Uncategorized";
-
-    return (
-      <>
-        <p>Category: {categoryLabel}</p>
-        {project.roles && project.roles.length > 0 && <p>Role: {project.roles.join(", ")}</p>}
-        {project.project_url && (
-          <p>
-            <a
-              href={project.project_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover-pointer before:bg-black"
-            >
-              Visit project
-            </a>
-          </p>
-        )}
-      </>
-    );
-  };
 
   useGSAP(() => {
     gsap.from(".text-header", {
@@ -330,8 +305,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <div className=" h-[20px] mt-5 flex justify-center">
-        <div className="w-[80vw] rounded-full h-[5px] bg-black opacity-50"></div>
+      <div className="h-[20px] mt-5 flex justify-center px-10">
+        <div className="w-full max-w-[1400px] rounded-full h-[5px] bg-black opacity-50"></div>
       </div>
       <section
         data-scroll-section
@@ -389,28 +364,31 @@ const Home = () => {
         </p>
       )}
 
-      {filteredProjects.map((project, index) => {
-        const projectGsap = project.gsapKey ?? `project${index + 1}`;
+      <div className="w-full">
+        {filteredProjects.map((project, index) => {
+          const projectGsap = project.gsapKey ?? `project${index + 1}`;
 
-        return (
-          <div key={project.id ?? project.slug ?? index}>
-            <Project
-              title={project.title}
-              body={project.summary ?? project.body ?? ""}
-              img={project.image_url}
-              bg={project.accent_color ?? DEFAULT_ACCENT_COLOR}
-              gsap={projectGsap}
-              projectUrl={project.project_url}
-              desc={renderProjectDetails(project)}
-            />
-            {index < filteredProjects.length - 1 && (
-              <div className=" h-[10px] mt-5 flex justify-center">
-                <div className="w-[50vw] rounded-full h-[3px] bg-black opacity-20"></div>
-              </div>
-            )}
-          </div>
-        );
-      })}
+          return (
+            <div key={project.id ?? project.slug ?? index}>
+              <Project
+                title={project.title}
+                body={project.summary ?? project.body ?? ""}
+                img={project.image_url}
+                bg={project.accent_color ?? DEFAULT_ACCENT_COLOR}
+                gsap={projectGsap}
+                projectUrl={project.project_url}
+                categories={project.categories}
+                roles={project.roles}
+              />
+              {index < filteredProjects.length - 1 && (
+                <div className="flex justify-center items-center px-10 py-5">
+                  <div className="w-full max-w-[1400px] rounded-full h-[3px] bg-black opacity-20"></div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
       <section
         data-scroll-section
