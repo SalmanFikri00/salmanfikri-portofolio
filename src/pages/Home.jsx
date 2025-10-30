@@ -257,7 +257,7 @@ const Home = () => {
                   <span className="absolute bottom-2 left-0 w-full h-3 bg-black/10 -skew-y-1"></span>
                 </span>
                 <br />
-                Developer creating
+                Developer
                 <br />
                 <span className="text-gray-400 font-light italic">great experiences</span>
               </h1>
@@ -271,7 +271,7 @@ const Home = () => {
               <img
                 src="/salman.png"
                 alt="Salman Fikri"
-                className="w-[400px] h-auto xl:w-[500px] drop-shadow-2xl"
+                className="w-[400px] h-auto xl:w-[600px]  drop-shadow-2xl"
               />
             </div>
           </div>
