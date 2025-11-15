@@ -250,8 +250,9 @@ const Home = () => {
         </div>
 
         <div className="relative z-10 flex flex-col justify-between w-full h-full max-w-7xl mx-auto pt-24 pb-12">
-          <div className="flex-grow flex items-center justify-between gap-10 lg:gap-20">
-            <div className="max-w-4xl text-left">
+          <div className="flex-grow flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-20">
+            {/* Text Content */}
+            <div className="w-full lg:max-w-4xl text-left lg:text-left">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] text-black tracking-tight">
                 I&apos;m a{" "}
                 <span className="relative inline-block">
@@ -259,7 +260,7 @@ const Home = () => {
                   <span className="absolute bottom-2 left-0 w-full h-3 bg-black/10 -skew-y-1"></span>
                 </span>
                 <br />
-                Developer
+                Developer creating
                 <br />
                 <span className="text-gray-400 font-light italic">great experiences</span>
               </h1>
@@ -268,18 +269,18 @@ const Home = () => {
               </p>
             </div>
 
-            {/* Profile Image */}
-            <div className="hidden lg:block">
+            {/* Profile Image - Now visible on mobile */}
+            <div className="w-full lg:w-auto flex justify-center lg:justify-end">
               <img
                 src="/salman.png"
                 alt="Salman Fikri"
-                className="w-[400px] h-auto xl:w-[600px]  drop-shadow-2xl"
+                className="w-[280px] sm:w-[350px] md:w-[400px] lg:w-[400px] xl:w-[500px] h-auto drop-shadow-2xl"
               />
             </div>
           </div>
 
           {/* Bottom Left Social Media Links */}
-          <div className="flex mt-4 space-x-6 text-sm font-medium text-gray-700 uppercase tracking-wide">
+          <div className="flex mt-8 lg:mt-4 space-x-4 sm:space-x-6 text-xs sm:text-sm font-medium text-gray-700 uppercase tracking-wide justify-center lg:justify-start">
             <a href="https://www.instagram.com/msf.dev/" className="hover-pointer before:bg-black">Instagram</a>
             <a href="https://www.linkedin.com/in/m-salman-al-fikri-b28201265/" className="hover-pointer before:bg-black">Linked In</a>
             <a href="https://github.com/SalmanFikri00/" className="hover-pointer before:bg-black">Github</a>
