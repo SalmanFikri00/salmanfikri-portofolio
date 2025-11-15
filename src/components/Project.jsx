@@ -10,7 +10,7 @@ const Project = ({img, title, body, categories, roles, bg = "bg-neutral-200" , g
       : "Uncategorized";
 
   return (
-    <section className="lg:flex justify-center items-center text-black py-10 ">
+    <section className="lg:flex justify-center items-center text-black py-10 px-5">
     <div className="flex flex-col-reverse lg:flex-row gap-10 md:gap-20 w-full max-w-[1200px]">
       <div className=" lg:flex-1 flex flex-col justify-between">
         <div className={"project relative "}>
