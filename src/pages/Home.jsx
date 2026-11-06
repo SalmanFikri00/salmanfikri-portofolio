@@ -243,9 +243,9 @@ const Home = () => {
 
         {/* Right Side Navigation/Categories */}
         <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col space-y-4 text-sm font-medium text-gray-400 uppercase tracking-widest">
-          <p className="hover:text-black transition-colors duration-200">Entrepreneur</p>
-          <p className="hover:text-black transition-colors duration-200">Fast Learner</p>
-          <p className="hover:text-black transition-colors duration-200">Tech Enthusiast</p>
+          <p className="hover:text-black transition-colors duration-200">Cloud Engineer</p>
+          <p className="hover:text-black transition-colors duration-200">Architecture First</p>
+          <p className="hover:text-black transition-colors duration-200">Self Hosted</p>
           <p className="hover:text-black transition-colors duration-200">Photographer</p>
         </div>
 
@@ -253,19 +253,19 @@ const Home = () => {
           <div className="flex-grow flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-20">
             {/* Text Content */}
             <div className="w-full lg:max-w-4xl text-left lg:text-left">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] text-black tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] text-black tracking-tight">
                 I&apos;m a{" "}
                 <span className="relative inline-block">
-                  <span className="relative z-10">Fullstack</span>
+                  <span className="relative z-10">Cloud</span>
                   <span className="absolute bottom-2 left-0 w-full h-3 bg-black/10 -skew-y-1"></span>
                 </span>
                 <br />
-                Developer creating
+                Engineer designing
                 <br />
-                <span className="text-gray-400 font-light italic">great experiences</span>
+                <span className="text-gray-400 font-light italic">production-grade architecture</span>
               </h1>
               <p className="mt-8 text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
-                I&apos;m <span className="font-semibold text-black">Salman Fikri</span>, a Fullstack Developer living in Jakarta, and I focus on making digital products that are easy to use, enjoyable, and get the job done.
+                I&apos;m <span className="font-semibold text-black">Salman Fikri</span>, a Cloud Engineer based in Jakarta. I design the architecture, wire the services, and keep them running in production. Graduate of SMK Negeri 26 Jakarta, Information Systems and Network Applications.
               </p>
             </div>
 
@@ -298,7 +298,7 @@ const Home = () => {
             <p className="flex flex-wrap mt-10 mb-8 text-lg font-light md:text-2xl lg:text-4xl perspective">
               <SubHead
                 text={
-                  "I am a student at SMK Negeri 26 Jakarta, majoring in Information Systems and Network Applications. Driven by curiosity and a passion for learning, I enjoy exploring new and exciting challenges, which has allowed me to develop a diverse skill set."
+                  "I recently graduated from SMK Negeri 26 Jakarta (2022–2026), majoring in Information Systems and Network Applications. That background is why I think in systems, not just screens — from the network and the server, up to the services and the interface. As a Cloud Engineer, I plan the architecture first, then build and run it."
                 }
               />
             </p>
@@ -311,17 +311,94 @@ const Home = () => {
             </div>
             <div className="lg:w-1/2">
               <p className="my-10 font-light">
-                I specialize in building microservices, from selecting the tech
-                stack and designing architecture to deployment. I can develop
-                both web apps and IoT-integrated systems using MQTT, with
-                expertise in microcontrollers like Arduino, ESP, ATtiny, and
-                SBCs as needed.I can also help you create an interactive and
-                fresh website, whether static or dynamic.
+                I work architecture-first. On Reservasi.Online I designed the whole layout myself — the
+                edge gateway, the services, the async workers — then built and deployed it. I do the same
+                for IoT: the device, the protocol, and the cloud behind it.
               </p>
+              <div className="grid gap-4 mb-10 sm:grid-cols-3">
+                <div className="border border-black/20 rounded-2xl p-5">
+                  <p className="text-xs uppercase tracking-[0.3em] text-black/50">Design</p>
+                  <p className="mt-3 text-sm font-light">
+                    I start with the architecture: what the system needs, which services, where they run,
+                    what breaks when traffic grows.
+                  </p>
+                </div>
+                <div className="border border-black/20 rounded-2xl p-5">
+                  <p className="text-xs uppercase tracking-[0.3em] text-black/50">Build</p>
+                  <p className="mt-3 text-sm font-light">
+                    Then I build it — frontend, backend, queues, and IoT or edge devices when the problem
+                    needs hardware.
+                  </p>
+                </div>
+                <div className="border border-black/20 rounded-2xl p-5">
+                  <p className="text-xs uppercase tracking-[0.3em] text-black/50">Run</p>
+                  <p className="mt-3 text-sm font-light">
+                    And I operate it: Docker, reverse proxy, TLS for custom domains, self-hosted on my own
+                    server.
+                  </p>
+                </div>
+              </div>
               <div onClick={() => transitionToPage('/about')} style={{ cursor: 'pointer' }}>
                 <Button text="More about me" />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section
+        data-scroll-section
+        id="architecture"
+        className="flex flex-col items-center px-10 py-20 text-black"
+      >
+        <div className="w-full max-w-[1200px]">
+          <p className="text-xs uppercase tracking-[0.3em] text-black/50">Architecture I actually run</p>
+          <h2 className="mt-4 text-3xl md:text-5xl">Reservasi.Online, the layout I designed</h2>
+          <p className="mt-6 max-w-2xl font-light">
+            A multi-tenant booking platform where every tenant can bring their own domain. This is how I
+            split it, and I operate every layer of it myself.
+          </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="border border-black/20 rounded-2xl p-5">
+              <p className="text-xs uppercase tracking-[0.3em] text-black/50">Edge</p>
+              <p className="mt-3 text-sm font-light">
+                Caddy gateway in Docker. On-demand TLS, so a tenant&apos;s custom domain gets a certificate
+                only after the app validates it.
+              </p>
+            </div>
+            <div className="border border-black/20 rounded-2xl p-5">
+              <p className="text-xs uppercase tracking-[0.3em] text-black/50">Services</p>
+              <p className="mt-3 text-sm font-light">
+                A Next.js app, a notification worker, and a WhatsApp worker — split by responsibility, not
+                by trend.
+              </p>
+            </div>
+            <div className="border border-black/20 rounded-2xl p-5">
+              <p className="text-xs uppercase tracking-[0.3em] text-black/50">Data</p>
+              <p className="mt-3 text-sm font-light">
+                Postgres holds the state. Redis and BullMQ run the queues, so sending email never blocks a
+                booking.
+              </p>
+            </div>
+            <div className="border border-black/20 rounded-2xl p-5">
+              <p className="text-xs uppercase tracking-[0.3em] text-black/50">Ops</p>
+              <p className="mt-3 text-sm font-light">
+                Dokploy and Traefik for deployment, staging on a wildcard certificate issued through a
+                Cloudflare DNS challenge.
+              </p>
+            </div>
+          </div>
+          <div className="mt-10 flex flex-wrap items-center gap-8">
+            <div onClick={() => transitionToPage('/projects')} style={{ cursor: 'pointer' }}>
+              <Button text="See the project" />
+            </div>
+            <a
+              href="https://reservasi.online"
+              target="_blank"
+              rel="noreferrer"
+              className="hover-pointer before:bg-black text-sm uppercase tracking-[0.3em]"
+            >
+              reservasi.online
+            </a>
           </div>
         </div>
       </section>
@@ -335,12 +412,12 @@ const Home = () => {
       >
         <div className=" lg:flex max-w-[1200px] gap-10">
           <h2 className="py-10 text-3xl lg:flex-1 md:text-6xl">
-            SOME THE MOST IMPRESIVE PROJECT I HAVE WORKED
+            THE SYSTEMS I HAVE DESIGNED AND RUN
           </h2>
           <div className="flex flex-col justify-center lg:flex-1">
             <p className="mb-10 font-light">
-              I have worked on various projects, ranging from websites and
-              design to IoT. Here are some of the most impressive ones.
+              From multi-tenant cloud platforms to devices in the field. Here are the ones I&apos;d
+              actually want you to look at.
             </p>
             <div onClick={() => transitionToPage('/projects')} style={{ cursor: 'pointer' }}>
               <Button text="See all project" />
@@ -511,7 +588,7 @@ const Home = () => {
           <p className="py-[5vw] text-sm">PORTOFOLIO.</p>
         </div>
       </section>
-      <p className="text-center bg-black">Copyrigth©2024</p>
+      <p className="text-center bg-black">Copyright © 2026</p>
     </div>
   );
 };

@@ -93,7 +93,7 @@ const About = () => {
               <span className="text-gray-400 font-light italic">Me</span>
             </h1>
             <p className="mt-8 text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
-              Get to know me better - my journey, skills, and what drives me to create amazing digital experiences.
+              How I think about systems - the architecture I design, the infrastructure I run, and the things I build to keep them online.
             </p>
           </div>
         </div>
@@ -108,9 +108,10 @@ const About = () => {
           <div className="fade-in">
             <h2 className="text-3xl md:text-5xl font-bold mb-8">Introduction</h2>
             <p className="text-lg md:text-xl font-light leading-relaxed text-gray-700">
-              Hi! I&apos;m <span className="font-semibold text-black">Salman Fikri</span>, a passionate Fullstack Developer from Jakarta, Indonesia.
-              I&apos;m currently studying at SMK Negeri 26 Jakarta, majoring in Information Systems and Network Applications.
-              My journey in tech started with curiosity and has grown into a deep passion for creating solutions that make a difference.
+              Hi! I&apos;m <span className="font-semibold text-black">Salman Fikri</span>, a Cloud Engineer from Jakarta, Indonesia.
+              I just graduated from SMK Negeri 26 Jakarta, where I studied Information Systems and Network Applications — which is why
+              I&apos;m comfortable starting a design from the network layer instead of the UI.
+              My work sits in the middle of the stack: how the pieces fit together, where they run, and what keeps them online.
             </p>
           </div>
         </div>
@@ -132,10 +133,11 @@ const About = () => {
               <div className="border-l-4 border-black pl-6 py-4">
                 <h3 className="text-2xl font-semibold mb-2">SMK Negeri 26 Jakarta</h3>
                 <p className="text-lg text-gray-600 mb-2">Information Systems and Network Applications</p>
-                <p className="text-gray-500">2021 - Present</p>
+                <p className="text-gray-500">2022 - 2026 · graduated</p>
                 <p className="mt-4 text-gray-700 leading-relaxed">
-                  Focusing on web development, network infrastructure, and system administration.
-                  Learning both theoretical concepts and practical applications in software engineering.
+                  Three years of networking and systems: routing, switching, server administration, and the
+                  operating systems underneath them. Web development came with it, but the network side is what
+                  I still reach for first when something has to be designed properly.
                 </p>
               </div>
             </div>
@@ -157,64 +159,132 @@ const About = () => {
             <h2 className="text-3xl md:text-5xl font-bold mb-8">Skills & Technologies</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-black">Frontend Development</h3>
+                <h3 className="text-xl font-semibold mb-4 text-black">Cloud & Infrastructure</h3>
                 <ul className="space-y-2 text-gray-700">
-                  <li>• React.js</li>
-                  <li>• JavaScript/ES6+</li>
-                  <li>• HTML5 & CSS3</li>
-                  <li>• Tailwind CSS</li>
-                  <li>• GSAP Animations</li>
+                  <li>• Self-hosted Linux servers</li>
+                  <li>• Docker & Docker Compose</li>
+                  <li>• Caddy & Traefik reverse proxy</li>
+                  <li>• TLS / custom domain strategy</li>
+                  <li>• Cloudflare DNS & tunnels</li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-black">Backend Development</h3>
+                <h3 className="text-xl font-semibold mb-4 text-black">Architecture & Design</h3>
                 <ul className="space-y-2 text-gray-700">
-                  <li>• Node.js</li>
-                  <li>• Express.js</li>
-                  <li>• RESTful APIs</li>
-                  <li>• Database Design</li>
-                  <li>• Microservices</li>
+                  <li>• Solution design & trade-offs</li>
+                  <li>• Multi-tenant isolation</li>
+                  <li>• Async jobs & queue design</li>
+                  <li>• API & service boundaries</li>
+                  <li>• Diagrams before code</li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-black">IoT & Hardware</h3>
+                <h3 className="text-xl font-semibold mb-4 text-black">Backend & APIs</h3>
                 <ul className="space-y-2 text-gray-700">
-                  <li>• Arduino</li>
-                  <li>• ESP32/ESP8266</li>
-                  <li>• MQTT Protocol</li>
-                  <li>• ATtiny</li>
-                  <li>• Sensor Integration</li>
+                  <li>• Node.js & TypeScript</li>
+                  <li>• REST APIs</li>
+                  <li>• Redis + BullMQ queues</li>
+                  <li>• Webhooks with HMAC verification</li>
+                  <li>• Express, Elysia, Adonis, Go, Rust</li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-black">Tools & Others</h3>
+                <h3 className="text-xl font-semibold mb-4 text-black">IoT & Edge</h3>
                 <ul className="space-y-2 text-gray-700">
-                  <li>• Git & GitHub</li>
-                  <li>• Docker</li>
-                  <li>• Linux/Unix</li>
-                  <li>• VS Code</li>
-                  <li>• Figma</li>
+                  <li>• ESP32 / ESP8266</li>
+                  <li>• Arduino & ATtiny</li>
+                  <li>• MQTT protocol</li>
+                  <li>• Sensor & RFID integration</li>
+                  <li>• Edge-to-cloud data flow</li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-black">Database</h3>
+                <h3 className="text-xl font-semibold mb-4 text-black">Databases</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• PostgreSQL</li>
                   <li>• MySQL</li>
                   <li>• MongoDB</li>
-                  <li>• Supabase</li>
                   <li>• Redis</li>
+                  <li>• Supabase</li>
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-black">Soft Skills</h3>
+                <h3 className="text-xl font-semibold mb-4 text-black">Frontend</h3>
                 <ul className="space-y-2 text-gray-700">
-                  <li>• Problem Solving</li>
-                  <li>• Team Collaboration</li>
-                  <li>• Quick Learner</li>
-                  <li>• Communication</li>
-                  <li>• Time Management</li>
+                  <li>• React & Next.js</li>
+                  <li>• JavaScript / ES6+</li>
+                  <li>• Tailwind CSS</li>
+                  <li>• GSAP animations</li>
+                  <li>• HTML5 & CSS3</li>
                 </ul>
+              </div>
+            </div>
+            <p className="mt-8 text-gray-700 font-light">
+              Everyday tools: Git & GitHub, Linux CLI, VS Code, Dokploy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="h-[20px] mt-5 flex justify-center px-10">
+        <div className="w-full max-w-[1400px] rounded-full h-[5px] bg-black opacity-50"></div>
+      </div>
+
+      {/* Reference Architecture Section */}
+      <section
+        data-scroll-section
+        className="flex flex-col items-center px-10 py-20 text-black"
+      >
+        <div className="max-w-[1200px] w-full">
+          <div className="fade-in">
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">Reference Architecture</h2>
+            <p className="text-lg text-gray-700 font-light max-w-3xl leading-relaxed">
+              The layout above is Reservasi.Online — a multi-tenant booking platform I designed from an empty
+              server. I wrote it out here the way I actually think about it: top to bottom, one request.
+            </p>
+            <div className="mt-10 space-y-6">
+              <div className="border-l-4 border-black pl-6 py-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-black/50">01 · Traffic in</p>
+                <h3 className="text-xl font-semibold mt-2 mb-2">Tenant domains & DNS</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Each tenant points their own domain at the platform. Cloudflare handles DNS, and a wildcard
+                  covers staging so previews never touch production.
+                </p>
+              </div>
+              <div className="border-l-4 border-black pl-6 py-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-black/50">02 · Edge</p>
+                <h3 className="text-xl font-semibold mt-2 mb-2">Caddy gateway in Docker</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  One gateway in front of everything: automatic certificates, on-demand TLS, and a validation
+                  call back into the app before a new custom domain is trusted. The tricky part here was the
+                  loop — the gateway asks the app, so the app&apos;s answer has to route back around the gateway.
+                </p>
+              </div>
+              <div className="border-l-4 border-black pl-6 py-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-black/50">03 · Deploy</p>
+                <h3 className="text-xl font-semibold mt-2 mb-2">Dokploy + Traefik on one host</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Everything is self-hosted on a single server, joined by one Docker network. Deliberately not
+                  Kubernetes — one host, few moving parts, and I can read every log myself.
+                </p>
+              </div>
+              <div className="border-l-4 border-black pl-6 py-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-black/50">04 · Services</p>
+                <h3 className="text-xl font-semibold mt-2 mb-2">App, notification worker, WhatsApp worker</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  The Next.js app stays responsive because sending is someone else&apos;s job: a queue worker
+                  handles email (React Email + Mailtrap), another handles WhatsApp through WAHA — kept on an
+                  internal bind with an HMAC-verified webhook and a persistent session volume, because losing
+                  that volume means scanning the QR code again, not losing business data.
+                </p>
+              </div>
+              <div className="border-l-4 border-black pl-6 py-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-black/50">05 · State</p>
+                <h3 className="text-xl font-semibold mt-2 mb-2">Postgres + Redis</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Postgres holds the bookings, Redis holds the work in flight. Retries live in the queue, so a
+                  provider outage delays a message instead of failing a booking.
+                </p>
               </div>
             </div>
           </div>
@@ -235,35 +305,36 @@ const About = () => {
             <h2 className="text-3xl md:text-5xl font-bold mb-8">What I Do</h2>
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-semibold mb-4">Fullstack Development</h3>
+                <h3 className="text-2xl font-semibold mb-4">Solution Architecture</h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  I specialize in building complete web applications from scratch, handling everything from
-                  database design and API development to creating responsive and interactive user interfaces.
-                  I focus on writing clean, maintainable code and following best practices.
+                  This is where I start, on every project. What does the system actually need, how many services,
+                  where do they run, and what breaks first when traffic grows? I draw the layout before I write
+                  code, and I keep the trade-offs written down — because a design you can&apos;t explain is a
+                  design you can&apos;t maintain.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold mb-4">IoT Solutions</h3>
+                <h3 className="text-2xl font-semibold mb-4">Cloud & Deployment</h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  I develop IoT-integrated systems using MQTT protocol, working with microcontrollers like
-                  Arduino, ESP32, and ATtiny. From sensor integration to real-time data visualization,
-                  I create solutions that bridge the physical and digital worlds.
+                  I run what I design. Linux servers I administer myself, containerised services, a reverse
+                  proxy in front, certificates that renew without me, and deployment tooling that keeps
+                  production and staging honest. Self-hosted first, cloud-managed when it earns its cost.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold mb-4">Microservices Architecture</h3>
+                <h3 className="text-2xl font-semibold mb-4">IoT & Edge Systems</h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  I design and implement microservices architectures, selecting the right tech stack,
-                  designing scalable systems, and handling deployment. I ensure services are maintainable,
-                  scalable, and efficient.
+                  Hardware is just another client with worse networking. I design the device side too — ESP32,
+                  Arduino, ATtiny, MQTT, sensors and RFID — so the data arrives in the cloud in a shape the
+                  system can actually handle.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold mb-4">Photography</h3>
+                <h3 className="text-2xl font-semibold mb-4">Fullstack Product Build</h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Beyond coding, I have a passion for photography. It helps me see the world from different
-                  perspectives and brings creativity into my technical work. I believe great design comes
-                  from observing and understanding visual aesthetics.
+                  I&apos;m not an architect who only draws boxes. When the layout needs building, I build it:
+                  the API, the database, the queue, and the interface on top. That&apos;s what makes the design
+                  realistic — I have to live with it afterwards.
                 </p>
               </div>
             </div>
@@ -287,39 +358,71 @@ const About = () => {
               <div className="bg-zinc-100 p-8 rounded-2xl">
                 <h3 className="text-2xl font-semibold mb-4">Entrepreneur Mindset</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  I approach problems with an entrepreneurial mindset, always looking for innovative
-                  solutions and opportunities to create value. I&apos;m not afraid to take calculated risks
-                  and learn from failures.
+                  I build products, not assignments. Reservasi.Online is mine — which means every architecture
+                  decision eventually lands on my own server and my own bill. That is a very effective way to
+                  learn trade-offs.
                 </p>
               </div>
               <div className="bg-zinc-100 p-8 rounded-2xl">
-                <h3 className="text-2xl font-semibold mb-4">Fast Learner</h3>
+                <h3 className="text-2xl font-semibold mb-4">Self-Taught By Necessity</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Technology evolves rapidly, and I pride myself on being able to quickly pick up new
-                  concepts, tools, and frameworks. I&apos;m always eager to expand my knowledge and stay
-                  current with industry trends.
+                  Nobody handed me a Caddy or a queue system — the product needed it, so I learned it and put it
+                  in production. Graduate or not, I&apos;m used to closing the gap between &quot;I read about
+                  it&quot; and &quot;I run it&quot;.
                 </p>
               </div>
               <div className="bg-zinc-100 p-8 rounded-2xl">
-                <h3 className="text-2xl font-semibold mb-4">Tech Enthusiast</h3>
+                <h3 className="text-2xl font-semibold mb-4">Infrastructure Curious</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  I&apos;m genuinely passionate about technology and love exploring new tools and techniques.
-                  Whether it&apos;s a new JavaScript framework or a hardware project, I dive in with enthusiasm
-                  and dedication.
+                  I&apos;m most interested in what happens between the click and the database: the proxy, the
+                  certificate, the retry, the container that didn&apos;t start. That layer is invisible when it
+                  works and expensive when it doesn&apos;t.
                 </p>
               </div>
               <div className="bg-zinc-100 p-8 rounded-2xl">
-                <h3 className="text-2xl font-semibold mb-4">Creative Problem Solver</h3>
+                <h3 className="text-2xl font-semibold mb-4">Practical Problem Solver</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  I believe every problem has a solution, and I enjoy the challenge of finding it.
-                  I combine technical skills with creative thinking to develop elegant solutions to
-                  complex problems.
+                  I&apos;d rather ship one boring service that scales than five clever ones I can&apos;t debug at
+                  2am. Every design I make has to survive being operated by whoever comes next — usually me.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Off-screen Section */}
+      <section
+        data-scroll-section
+        className="flex flex-col items-center px-10 py-20 text-black"
+      >
+        <div className="max-w-[1200px] w-full">
+          <div className="fade-in">
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">Off-screen</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Photography</h3>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  I shoot, edit, and deliver — Lightroom, Illustrator, a bit of motion work in Alight Motion.
+                  It keeps my eye honest about composition, which quietly helps the way I lay out a system
+                  diagram or an interface.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Everything else</h3>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  Tinkering with homelab gear and small hardware projects when nothing is on fire. Most of what
+                  I know about networking started as something I wanted to get working at home.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="h-[20px] mt-5 flex justify-center px-10">
+        <div className="w-full max-w-[1400px] rounded-full h-[5px] bg-black opacity-50"></div>
+      </div>
 
       {/* Contact Section */}
       <section
@@ -419,7 +522,7 @@ const About = () => {
           <p className="py-[5vw] text-sm">PORTOFOLIO.</p>
         </div>
       </section>
-      <p className="text-center bg-black">Copyright©2024</p>
+      <p className="text-center bg-black">Copyright © 2026</p>
     </div>
   );
 };

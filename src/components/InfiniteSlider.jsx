@@ -9,6 +9,7 @@ const InfiniteSlider = () => {
         'bun.png',
         'elysiajs.webp',
         'react.png',
+        'next.png',
         'svelte.png',
         'adonis.png',
         'node.png',

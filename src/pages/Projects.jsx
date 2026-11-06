@@ -245,8 +245,8 @@ const Projects = () => {
               <span className="text-gray-400 font-light italic">Projects</span>
             </h1>
             <p className="mt-8 text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
-              Explore all the projects I&apos;ve worked on, from web applications to IoT solutions.
-              Each project represents a unique challenge and learning experience.
+              The systems I&apos;ve designed and built — from multi-tenant cloud setups to devices in the field.
+              Each one started with a layout on paper before it started with code.
             </p>
           </div>
         </div>
@@ -374,7 +374,7 @@ const Projects = () => {
           <p className="py-[5vw] text-sm">PORTOFOLIO.</p>
         </div>
       </section>
-      <p className="text-center bg-black">Copyright©2024</p>
+      <p className="text-center bg-black">Copyright © 2026</p>
     </div>
   );
 };

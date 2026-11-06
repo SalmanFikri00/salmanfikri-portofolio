@@ -4,19 +4,20 @@ import '../App.css'
 const InfiniteSliderReverse = () => {
 
     const dataSkill = [
-        'aws.png',
+        'docker.svg',
+        'caddy.svg',
+        'traefikmesh.svg',
         'cloudflare.png',
+        'aws.png',
+        'linux.svg',
+        'postgresql.svg',
+        'redis.svg',
+        'nextcloud.png',
+        'casaos.svg',
+        'pnet.png',
         'orangepi.png',
         'espressif.png',
-        'casaos.svg',
-        'nextcloud.png',
         'arduino.png',
-        'pnet.png',
-        'figma.png',
-        'alightmotion.png',
-        'illustrator.png',
-        'lightroom.png',
-        'photoshop.png',
     ]
 
   return (
